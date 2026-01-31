@@ -2,7 +2,7 @@
 
 namespace Bitt\Http;
 
-final class Request
+class Request
 {
     public function __construct(
         public Parameter $query,

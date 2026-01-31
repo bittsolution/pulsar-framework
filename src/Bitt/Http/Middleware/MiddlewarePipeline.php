@@ -2,6 +2,7 @@
 
 namespace Bitt\Http\Middleware;
 
+use Bitt\Http\ControllerArgumentResolver;
 use Bitt\Http\Request;
 use Bitt\Http\Response;
 use Bitt\Http\Route;
@@ -37,6 +38,8 @@ final class MiddlewarePipeline
     private function callController(Route $route, Request $request, Response $response): Response
     {
         $controller = $this->resolver->resolve($route);
-        return $controller($request, $response);
+        $argumentResolver = new ControllerArgumentResolver();
+        $requestResolved = $argumentResolver->resolve($controller, $request);
+        return $controller($requestResolved, $response);
     }
 }

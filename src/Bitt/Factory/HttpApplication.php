@@ -34,7 +34,8 @@ class HttpApplication implements ApplicationInterface
         $response = new Response("", 200);
 
         $kernel = new HttpKernel($this->router);
-        $kernel->handle($request, $response)->send();
+        $response = $kernel->handle($request, $response);
+        $response->send();
     }
 
     public function setRouter(Router $router): void

@@ -5,7 +5,7 @@ return [
         'secure' => true,
         'same_site' => 'lax',
         'signed' => [''],
-        'encrypted' => ['user_id'],
+        'encrypted' => ['access_token', 'refresh_token'],
     ],
     'cors' => [
         'allowed_origins' => ['*'],
