@@ -37,6 +37,11 @@ class HttpApplication implements ApplicationInterface
         $kernel->handle($request, $response)->send();
     }
 
+    public function setRouter(Router $router): void
+    {
+        $this->router = $router;
+    }
+
     public function addRoute(
         string $method,
         string $path,
