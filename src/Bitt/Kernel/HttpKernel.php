@@ -3,6 +3,9 @@
 namespace Bitt\Kernel;
 
 use Bitt\Http\ControllerResolver;
+use Bitt\Http\Middleware\CookieMiddleware;
+use Bitt\Http\Middleware\CorsMiddleware;
+use Bitt\Http\Middleware\LoggerMiddleware;
 use Bitt\Http\Middleware\MiddlewarePipeline;
 use Bitt\Http\Request;
 use Bitt\Http\Response;
@@ -23,7 +26,16 @@ class HttpKernel implements KernelInterface
     public function handle(Request $request, Response $response): Response
     {
         $route = $this->router->match($request);
-        $this->pipeline->setMiddlewares($route->middlewares());
+        $this->pipeline->setMiddlewares(array_merge($this->frameworkMiddlewares(), $route->middlewares()));
         return $this->pipeline->handle($request, $response, $route);
+    }
+
+    private function frameworkMiddlewares(): array
+    {
+        return [
+            CorsMiddleware::class,
+            CookieMiddleware::class,
+            LoggerMiddleware::class,
+        ];
     }
 }
