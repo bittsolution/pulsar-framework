@@ -5,6 +5,7 @@ namespace Bitt\Kernel;
 use Bitt\Http\ControllerResolver;
 use Bitt\Http\Middleware\CookieMiddleware;
 use Bitt\Http\Middleware\CorsMiddleware;
+use Bitt\Http\Middleware\JsonMiddleware;
 use Bitt\Http\Middleware\LoggerMiddleware;
 use Bitt\Http\Middleware\MiddlewarePipeline;
 use Bitt\Http\Request;
@@ -35,6 +36,7 @@ class HttpKernel implements KernelInterface
         return [
             CorsMiddleware::class,
             CookieMiddleware::class,
+            JsonMiddleware::class,
             LoggerMiddleware::class,
         ];
     }

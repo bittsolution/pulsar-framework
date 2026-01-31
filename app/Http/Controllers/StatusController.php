@@ -6,13 +6,12 @@ use Bitt\Http\Request;
 use Bitt\Http\Response;
 use Bitt\Logger\LoggerInterface;
 
-class TestController
+class StatusController
 {
     public function __construct(private LoggerInterface $logger) {}
 
     public function __invoke(Request $req, Response $res): Response
     {
-        $this->logger->log("User Id by cookie:", ["cookie" => $req->cookies->get("user_id")]);
-        return $res->json(["message" => "TEST"]);
+        return $res->json(["status" => "( •_•) API is running!"]);
     }
 }

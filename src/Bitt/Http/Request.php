@@ -6,7 +6,7 @@ final class Request
 {
     public function __construct(
         public Parameter $query,
-        public Parameter $request,
+        public Parameter $body,
         public Parameter $headers,
         public CookieBag $cookies,
         public Parameter $server,
@@ -36,5 +36,10 @@ final class Request
     public function getUri(): string
     {
         return $this->server->get('REQUEST_URI', '/');
+    }
+
+    public function getContentType(): string
+    {
+        return $this->server->get('CONTENT_TYPE', '');
     }
 }
